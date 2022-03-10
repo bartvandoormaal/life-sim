@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="./entity.js"></script>
+    <script src="./life.js"></script>
+    <script src="./food.js"></script>
+    <script src="./world.js"></script>
+    <script src="./pointquadtree.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        canvas {
+            display: block;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <script>
+        let world;
+ 
+        
+        function setup() {
+            createCanvas(800, 800);
+
+            let dh = createDiv( "Boids / Flocking").position(width + 10, 10).style('font-weight', '700');
+            
+            let d1 = createDiv( "Separation").position(width + 10, 40);
+            window.sSLider = createSlider( 0, 10, 2.4, 0.1 ).position(width + 100, 40 + 2);
+            
+            let d2 = createDiv( "Alignment").position(width + 10, 70);
+            window.aSLider = createSlider( 0, 10,1.3, 0.1 ).position(width + 100, 70 + 2);
+
+            let d3 = createDiv( "Cohision").position(width + 10, 100);
+            window.cSLider = createSlider( 0, 10, 0.2, 0.1 ).position(width + 100, 100 + 2);
+
+
+            let dh2 = createDiv( "Rendering" ).position(width + 10, 140).style('font-weight', '700');
+            window.checkRenderDtls = createCheckbox( " Extra entity info", false).position(width + 10, 170);
+            window.checkRenderLines = createCheckbox( " Mate / Food lines", false).position(width + 10, 200);
+            window.checkRenderColoredEntities = createCheckbox( " Colored entities", false).position(width + 10, 230);
+
+
+            world = new World();            
+        }
+
+        function draw() {
+            background(220);
+            world.tick();
+            world.render();
+        }
+    </script>
+
+  </body>
+</html>
